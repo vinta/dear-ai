@@ -32,15 +32,15 @@ ssh-keygen -t ed25519 -f ~/.ssh/vultr_openclaw -N "" -C "vultr_openclaw"
 ## Step 2: Add SSH Key to Vultr [Human]
 
 1. Print the public key: `cat ~/.ssh/vultr_openclaw.pub`
-2. Ask your human to copy the output, go to https://my.vultr.com/sshkeys/, click **Add SSH Key**, name it `vultr_openclaw`, paste the public key, and save
+2. Ask your human to copy the output, go to [Vultr SSH Keys](https://my.vultr.com/sshkeys/), click **Add SSH Key**, name it `vultr_openclaw`, paste the public key, and save
 
-**Verify:** Ask your human to confirm the key appears at https://my.vultr.com/sshkeys/
+**Verify:** Ask your human to confirm the key appears at [Vultr SSH Keys](https://my.vultr.com/sshkeys/)
 
 ## Step 3: Deploy a Server on Vultr [Human]
 
 Ask your human to create a Vultr server with these settings:
 
-1. Go to https://my.vultr.com/ -> **Deploy** -> **Deploy New Server**
+1. Go to [Vultr](https://my.vultr.com/) -> **Deploy** -> **Deploy New Server**
 2. Select **Type**: **Shared CPU**
 3. Select **Location**: choose a location close to them
 4. Select **Plan**: the minimum is `vc2-1c-2gb` (1 vCPU, 2 GB RAM) -- lower will OOM
@@ -58,7 +58,7 @@ Wait for the server status to show **Running**, then ask your human for the **IP
 
 Add this to the local `~/.ssh/config` so subsequent commands can use `ssh vultr_openclaw`:
 
-```
+```ssh-config
 Host vultr_openclaw
     HostName YOUR_SERVER_IP
     User linuxuser
@@ -89,7 +89,7 @@ ssh vultr_openclaw 'echo "export PATH=\$HOME/.npm-global/bin:\$PATH" >> ~/.bashr
 ssh vultr_openclaw 'echo "[ -f ~/.bashrc ] && . ~/.bashrc" >> ~/.profile'
 ```
 
-Reference: https://docs.openclaw.ai/install
+Reference: [OpenClaw Install](https://docs.openclaw.ai/install)
 
 ## Step 6: Configure OpenClaw with LLM Models [Human]
 
@@ -100,7 +100,7 @@ OpenClaw agents burn through tokens fast. A subscription plan is much cheaper th
 
 Ask your human which provider they prefer, then walk them through the corresponding flow below. Both require an interactive terminal, so your human will need to run the commands themselves.
 
-Reference: https://docs.openclaw.ai/cli/onboard
+Reference: [OpenClaw Onboard](https://docs.openclaw.ai/cli/onboard)
 
 **For ChatGPT (OpenAI Codex):**
 
@@ -128,7 +128,7 @@ The command will print an OAuth URL. Your human should:
 3. The browser will redirect to a `localhost` URL that fails to load -- this is expected
 4. Copy the **entire URL** from the address bar and paste it back into the terminal prompt
 
-Reference: https://docs.openclaw.ai/providers/openai
+Reference: [OpenClaw OpenAI Provider](https://docs.openclaw.ai/providers/openai)
 
 **For Anthropic (Claude Pro/Max):**
 
@@ -158,7 +158,7 @@ ssh -t vultr_openclaw "source ~/.bashrc && openclaw onboard \
 
 5. Paste the token when prompted
 
-Reference: https://docs.openclaw.ai/providers/anthropic
+Reference: [OpenClaw Anthropic Provider](https://docs.openclaw.ai/providers/anthropic)
 
 **Verify (either provider):**
 
@@ -178,7 +178,7 @@ ssh vultr_openclaw "source ~/.bashrc && openclaw plugins enable discord"
 
 Ask your human to create the bot on Discord:
 
-1. Go to https://discord.com/developers/applications -> **New Application** -> Name it `OpenClaw`
+1. Go to [Discord Developer Applications](https://discord.com/developers/applications) -> **New Application** -> Name it `OpenClaw`
 2. Go to **Installation** -> Set Install Link to **None** -> Save Changes
 3. Go to **Bot**:
    - Click **Reset Token** -> Copy the token (this is the `DISCORD_BOT_TOKEN`)
@@ -209,7 +209,7 @@ ssh vultr_openclaw "source ~/.bashrc && openclaw config set channels.discord.gro
 ssh vultr_openclaw "source ~/.bashrc && openclaw gateway restart"
 ```
 
-Reference: https://docs.openclaw.ai/channels/discord
+Reference: [OpenClaw Discord Channel](https://docs.openclaw.ai/channels/discord)
 
 **Verify:**
 
