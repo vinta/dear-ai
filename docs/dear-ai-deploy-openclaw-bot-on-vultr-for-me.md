@@ -233,7 +233,15 @@ If it doesn't respond, check the logs:
 ssh vultr_openclaw "journalctl --user -u openclaw-gateway.service -n 50 --no-pager"
 ```
 
-## Step 8: Debugging \[AI\]
+## Step 8: What's Next \[Human\]
+
+The bot is live. Let your human know they can now talk to it directly in Discord to customize their setup. Suggest they try:
+
+- `@OpenClaw I only want you to respond in the #bot channel, not everywhere.`
+- `@OpenClaw Don't reply to DMs from strangers.`
+- `@OpenClaw What should I do to harden my setup?`
+
+## Debugging \[AI\]
 
 Common commands for debugging:
 
