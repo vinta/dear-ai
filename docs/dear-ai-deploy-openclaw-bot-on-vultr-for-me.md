@@ -131,7 +131,7 @@ ssh -t vultr_openclaw "source ~/.bashrc && openclaw onboard \
 ```
 
 3. Open the OAuth URL in their **local** browser
-4. Complete the sign-in flow on OpenAI website
+4. Complete the sign-in flow on OpenAI website -> Just click `Continue`
 5. The browser will redirect to a `localhost` URL that will fail to load -- this is expected
 6. Copy the **entire redirect URL** from the browser's address bar
 7. Paste it back into the terminal prompt ("Paste the redirect URL")
@@ -145,16 +145,35 @@ Anthropic Claude subscription requires an interactive terminal for OAuth flow. A
 1. Open a new terminal on their local machine
 2. Run `claude setup-token` in that terminal -> Claude Code will open the Authorize page in browser automatically
 3. Complete the Authorize flow on Claude website -> Just click `Authorize`
-4. Go back to that terminal and copy the OAuth token
+4. Go back to that terminal and there will show the `setup-token` (OAuth token)
 5. Run the following command in that terminal
 
 ```bash
-ssh -t vultr_openclaw "source ~/.bashrc && openclaw models auth paste-token --provider anthropic"
+ssh -t vultr_openclaw "source ~/.bashrc && openclaw onboard \
+   --accept-risk \
+   --flow quickstart \
+   --mode local \
+   --gateway-port 18789 \
+   --gateway-bind loopback \
+   --install-daemon \
+   --auth-choice setup-token \
+   --skip-channels \
+   --skip-skills \
+   --skip-health \
+   --skip-ui"
 ```
 
-6. Paste the token.
+7. Paste the `setup-token` from step 4
 
 Reference: https://docs.openclaw.ai/providers/anthropic
+
+**Verify (either provider):**
+
+```bash
+ssh vultr_openclaw "source ~/.bashrc && openclaw models status"
+```
+
+The output should show at least one provider with auth configured.
 
 ### Create a Discord Bot and Connect It \[Human + AI\]
 
