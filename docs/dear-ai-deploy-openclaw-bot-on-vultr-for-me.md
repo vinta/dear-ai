@@ -219,28 +219,44 @@ ssh vultr_openclaw "test -f ~/.openclaw/openclaw.json && echo 'config exists'"
 
 ## Step 8: Post Install \[AI\]
 
-Install the following tools on the server. No need to ask for permissions since they're essential for OpenClaw.
+Install dependencies and harden the server. These are all non-interactive -- no human input needed.
 
 ### Homebrew
 
-Install Homebrew on the server since OpenClaw uses `brew` for skills dependency management.
+OpenClaw uses `brew` for skills dependency management:
 
 ```bash
 ssh vultr_openclaw 'NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
 ssh vultr_openclaw 'echo "eval \"\$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)\"" >> ~/.bashrc'
 ```
 
+### Skills
+
+Install third-party skills the bot can use:
+
+```bash
+ssh vultr_openclaw "source ~/.bashrc && npm install -g @steipete/bird"
+```
+
+### Server Hardening
+
+Enable automatic security updates:
+
+```bash
+ssh vultr_openclaw "sudo apt-get update && sudo apt-get install -y unattended-upgrades"
+ssh vultr_openclaw "sudo dpkg-reconfigure -f noninteractive unattended-upgrades"
+```
+
+Allow only SSH inbound (the bot only makes outbound connections to Discord and LLM APIs):
+
+```bash
+ssh vultr_openclaw "sudo ufw default deny incoming && sudo ufw default allow outgoing && sudo ufw allow OpenSSH && sudo ufw --force enable"
+```
+
 **Verify:**
 
 ```bash
-ssh vultr_openclaw "source ~/.bashrc && brew --version"
-```
-
-### Skills
-
-```bash
-ssh vultr_openclaw "source ~/.bashrc && npm install -g @steipete/bird"
-ssh vultr_openclaw "source ~/.bashrc && npm install -g @steipete/bird"
+ssh vultr_openclaw "source ~/.bashrc && brew --version && sudo ufw status"
 ```
 
 ## Step 9: Verify End-to-End \[Human\]
