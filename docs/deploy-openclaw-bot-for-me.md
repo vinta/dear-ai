@@ -8,7 +8,7 @@ Each step is marked:
 
 ## How to Use This Guide [Human]
 
-Open Claude Code/Codex/Gemini in your terminal and type `Read https://vinta.github.io/dear-ai/deploy-openclaw-bot-for-me.md and do that for me`. Your AI should handle all the hard parts for you!
+Open Claude Code/Codex/Gemini in your terminal and type `Fetch and follow https://vinta.github.io/dear-ai/deploy-openclaw-bot-for-me.md`. Your AI should handle all the hard parts for you!
 
 This guide covers a minimal setup. Once the bot is running, you can talk to it directly in Discord to customize it however you like.
 
