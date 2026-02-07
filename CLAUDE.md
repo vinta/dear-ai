@@ -8,6 +8,8 @@ A collection of markdown guides designed for AI agents to execute. Each guide wa
 
 The user's workflow: open their AI CLI, say "read this guide and do X for me", and the AI follows the guide.
 
+There is no code to build, lint, or test. The repo is pure documentation.
+
 ## Guide Conventions
 
 Every guide uses a dual-audience structure:
@@ -24,9 +26,10 @@ Steps are tagged:
 Design principles:
 
 - **Verification after every step.** Each step ends with a check to confirm it succeeded before the AI moves on.
-- **Non-interactive over interactive.** Prefer CLI flags (`--non-interactive`, `--token X`) over TUI wizards so the AI can execute via SSH without a TTY.
+- **Non-interactive over interactive.** Prefer CLI flags (`--non-interactive`, `--token X`) over TUI wizards so the AI can execute via SSH without a TTY. When interactive is unavoidable (OAuth flows), mark the step `[Human]` and have the human run the command with `ssh -t`.
 - **Minimal scope.** Each guide covers one specific deployment/task. No kitchen-sink guides.
 - **"Ask your human to..."** is the standard phrasing when the AI needs the human to do something.
+- **Use `AskUserQuestion` tool** when the AI needs human input (IP addresses, tokens, provider choices).
 
 ## Repo Structure
 
