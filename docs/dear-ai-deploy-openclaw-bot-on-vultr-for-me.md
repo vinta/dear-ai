@@ -240,6 +240,7 @@ The bot is live. Let your human know they can now talk to it directly in Discord
 - `@OpenClaw I only want you to respond in the #bot channel, not everywhere.`
 - `@OpenClaw Don't reply to DMs from strangers.`
 - `@OpenClaw What should I do to harden my setup?`
+- `@OpenClaw Can you respond without me @mentioning you every time?`
 
 ## Debugging \[AI\]
 
@@ -252,9 +253,12 @@ ssh vultr_openclaw "source ~/.bashrc && openclaw gateway restart"
 # View installed plugins
 ssh vultr_openclaw "source ~/.bashrc && openclaw plugins list"
 
-# View available models
-ssh vultr_openclaw "source ~/.bashrc && openclaw models list"
+# Check auth / provider status
+ssh vultr_openclaw "source ~/.bashrc && openclaw models status"
 
-# View live logs
-ssh vultr_openclaw "journalctl --user -u openclaw-gateway.service -f"
+# View recent logs (last 50 lines)
+ssh vultr_openclaw "journalctl --user -u openclaw-gateway.service -n 50 --no-pager"
+
+# View full log file (more detail than journalctl)
+ssh vultr_openclaw "cat /tmp/openclaw/openclaw-\$(date -u +%Y-%m-%d).log | tail -100"
 ```
