@@ -271,6 +271,7 @@ The bot is live. Let your human know they can now talk to it directly in Discord
 - `@OpenClaw Can you respond without me @mentioning you every time?`
 - `@OpenClaw How do I access the web UI from my local machine?`
 - `@OpenClaw What should I do to harden my setup?`
+- `@OpenClaw Help me set up backups for your workspace. Any suggestions?`
 
 ## Debugging [AI]
 
