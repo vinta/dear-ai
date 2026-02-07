@@ -1,8 +1,8 @@
-# Dear AI, Deploy OpenClaw Bot on Vultr for Me
+# Dear AI, Deploy OpenClaw Bot for Me
 
 ## How to Use This Guide [Human]
 
-Open Claude Code/Codex/Gemini in your terminal and type `Read https://url-to-this-post and deploy the OpenClaw bot on Vultr for me`. Your AI should handle all the hard parts for you!
+Open Claude Code/Codex/Gemini in your terminal and type `Read https://vinta.github.io/dear-ai/deploy-openclaw-bot-for-me.md and please do that for me`. Your AI should handle all the hard parts for you!
 
 Each step is marked:
 
@@ -228,14 +228,6 @@ OpenClaw uses `brew` for skills dependency management:
 ```bash
 ssh vultr_openclaw 'NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
 ssh vultr_openclaw 'echo "eval \"\$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)\"" >> ~/.bashrc'
-```
-
-### Skills
-
-Install third-party skills the bot can use:
-
-```bash
-ssh vultr_openclaw "source ~/.bashrc && npm install -g @steipete/bird"
 ```
 
 ### Server Hardening
