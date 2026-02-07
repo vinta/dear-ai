@@ -11,6 +11,7 @@ allowed-tools:
   - Bash(ssh-keygen:*)
   - Bash(ssh:*)
   - Bash(test:*)
+  - Bash(chmod:*)
   - WebFetch(domain:docs.openclaw.ai)
   - WebFetch(domain:openclaw.ai)
   - WebFetch(domain:vinta.github.io)
