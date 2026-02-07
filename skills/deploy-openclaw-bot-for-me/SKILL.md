@@ -1,6 +1,6 @@
 ---
 name: deploy-openclaw-bot-for-me
-description: (dear-ai) Deploy a new OpenClaw bot with Discord integration on a Vultr server.
+description: (dear-ai) Deploy a OpenClaw bot with Discord integration on a Vultr server.
 user-invocable: true
 allowed-tools:
   - Read
@@ -10,10 +10,10 @@ allowed-tools:
   - AskUserQuestion
   - Bash(ssh-keygen:*)
   - Bash(ssh:*)
-  - Bash(test:*)
   - Bash(chmod:*)
-  - WebFetch(domain:docs.openclaw.ai)
+  - Bash(test:*)
   - WebFetch(domain:openclaw.ai)
+  - WebFetch(domain:docs.openclaw.ai)
   - WebFetch(domain:vinta.github.io)
   - mcp__plugin_context7_context7__resolve-library-id
   - mcp__plugin_context7_context7__query-docs

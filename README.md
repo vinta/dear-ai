@@ -11,7 +11,7 @@ Open [Claude Code](https://code.claude.com/docs), [Codex](https://github.com/ope
 Open your AI coding agent in the terminal and type:
 
 - `Fetch and follow https://vinta.github.io/dear-ai/deploy-openclaw-bot-for-me.md`
-  - Source: [Deploy OpenClaw Bot for Me](docs/deploy-openclaw-bot-for-me.md) - Deploy an OpenClaw bot for Discord on a Vultr server
+  - Source: [Deploy OpenClaw Bot for Me](docs/deploy-openclaw-bot-for-me.md) - Deploy a OpenClaw bot with Discord integration on a Vultr server
 
 ## Skills
 
