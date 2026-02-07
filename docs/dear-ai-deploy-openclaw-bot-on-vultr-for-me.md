@@ -99,21 +99,18 @@ Reference: https://docs.openclaw.ai/install
 
 ## Step 6: Onboard OpenClaw with Model Provider \[Human\]
 
-OpenClaw agents consume a lot of tokens. Using pay-per-token API keys gets expensive fast. Use a subscription plan instead:
+OpenClaw agents burn through tokens fast. A subscription plan is much cheaper than pay-per-token API keys:
 
-- **OpenAI ChatGPT Pro/Plus** -- use OpenAI Codex OAuth
-- **Anthropic Claude Pro/Max** -- use Anthropic `claude setup-token`
+- **OpenAI ChatGPT Pro/Plus** -- authenticates via Codex OAuth
+- **Anthropic Claude Pro/Max** -- authenticates via `claude setup-token`
 
-Ask your human which provider they want, then run the corresponding flow.
+Ask your human which provider they prefer, then walk them through the corresponding flow below. Both require an interactive terminal, so your human will need to run the commands themselves.
 
 Reference: https://docs.openclaw.ai/cli/onboard
 
 **For ChatGPT (OpenAI Codex):**
 
-OpenAI ChatGPT subscription requires an interactive terminal for OAuth flow. Ask your human to:
-
-1. Open a new terminal
-2. Run the following command in that terminal
+Ask your human to open a new terminal and run:
 
 ```bash
 ssh -t vultr_openclaw "source ~/.bashrc && openclaw onboard \
@@ -130,23 +127,25 @@ ssh -t vultr_openclaw "source ~/.bashrc && openclaw onboard \
    --skip-ui"
 ```
 
-3. Open the OAuth URL in their **local** browser
-4. Complete the sign-in flow on OpenAI website -> Just click `Continue`
-5. The browser will redirect to a `localhost` URL that will fail to load -- this is expected
-6. Copy the **entire redirect URL** from the browser's address bar
-7. Paste it back into the terminal prompt ("Paste the redirect URL")
+The command will print an OAuth URL. Your human should:
+
+1. Open the URL in their **local** browser
+2. Sign in on the OpenAI website and click `Continue`
+3. The browser will redirect to a `localhost` URL that fails to load -- this is expected
+4. Copy the **entire URL** from the address bar and paste it back into the terminal prompt
 
 Reference: https://docs.openclaw.ai/providers/openai
 
 **For Anthropic (Claude Pro/Max):**
 
-Anthropic Claude subscription requires an interactive terminal for OAuth flow. Ask your human to:
+This is a two-part flow. First, your human generates a setup-token locally, then pastes it into the onboard command on the server.
 
-1. Open a new terminal on their local machine
-2. Run `claude setup-token` in that terminal -> Claude Code will open the Authorize page in browser automatically
-3. Complete the Authorize flow on Claude website -> Just click `Authorize`
-4. Go back to that terminal and there will show the `setup-token` (OAuth token)
-5. Run the following command in that terminal
+Ask your human to open a new terminal and run:
+
+1. `claude setup-token` -- this opens the Anthropic authorize page in their browser
+2. Click **Authorize** on the Anthropic website
+3. Go back to the terminal and copy the token that was printed
+4. Run the onboard command:
 
 ```bash
 ssh -t vultr_openclaw "source ~/.bashrc && openclaw onboard \
@@ -163,7 +162,7 @@ ssh -t vultr_openclaw "source ~/.bashrc && openclaw onboard \
    --skip-ui"
 ```
 
-7. Paste the `setup-token` from step 4
+5. Paste the token when prompted
 
 Reference: https://docs.openclaw.ai/providers/anthropic
 
@@ -173,33 +172,50 @@ Reference: https://docs.openclaw.ai/providers/anthropic
 ssh vultr_openclaw "source ~/.bashrc && openclaw models status"
 ```
 
-The output should show at least one provider with auth configured.
+Should show at least one provider with auth configured.
 
 ### Create a Discord Bot and Connect It \[Human + AI\]
 
+Enable the Discord channel plugin first:
+
+```bash
+ssh vultr_openclaw "source ~/.bashrc && openclaw plugins enable discord"
+```
+
 Ask your human to create the bot on Discord:
 
-1. Go to https://discord.com/developers/applications -> **New Application** -> give it a name
-2. Go to **Installation** -> set Install Link to **None**
+1. Go to https://discord.com/developers/applications -> **New Application** -> Name it `OpenClaw`
+2. Go to **Installation** -> Set Install Link to **None** -> Save Changes
 3. Go to **Bot**:
-   - Click **Reset Token** -> copy the token (this is the `DISCORD_BOT_TOKEN`)
+   - Click **Reset Token** -> Copy the token (this is the `DISCORD_BOT_TOKEN`)
    - Turn **OFF** Public Bot
    - Turn **ON** Server Members Intent
    - Turn **ON** Message Content Intent
+   - Select `Administrator` for Bot Permissions
+   - Save Changes
 4. Go to **OAuth2** -> **URL Generator**:
-   - Under Scopes, check **bot**
-   - Under Bot Permissions, select: Send Messages, Read Message History, Add Reactions
+   - Under Scopes, select `bot`
+   - Under Bot Permissions, select: `Administrator`
    - Copy the **Generated URL**
-5. Open the Generated URL in the browser -> add the bot to their Discord server
-6. Create a channel (e.g., `#bot`) where the bot will listen
+5. Open the Generated URL in the browser -> Add the app to their Discord server
+6. Create a text channel (e.g., `#bot`) on their Discord server
 
-Then ask your human for the `DISCORD_BOT_TOKEN` and run:
+Ask your human for the `DISCORD_BOT_TOKEN` and run:
 
 ```bash
 ssh vultr_openclaw "source ~/.bashrc && openclaw channels add --channel discord --token YOUR_DISCORD_BOT_TOKEN"
 ```
 
 Replace `YOUR_DISCORD_BOT_TOKEN` with the token your human provides.
+
+The default `groupPolicy` is `allowlist` with no entries, so the bot silently ignores all server messages. Set it to `open` so the bot responds in any channel:
+
+```bash
+ssh vultr_openclaw "source ~/.bashrc && openclaw config set channels.discord.groupPolicy open"
+ssh vultr_openclaw "source ~/.bashrc && openclaw gateway restart"
+```
+
+Reference: https://docs.openclaw.ai/channels/discord
 
 **Verify:**
 
@@ -217,14 +233,11 @@ If it doesn't respond, check the logs:
 ssh vultr_openclaw "journalctl --user -u openclaw-gateway.service -n 50 --no-pager"
 ```
 
-## Step 8: Management \[AI\]
+## Step 8: Debugging \[AI\]
 
-Common commands for day-to-day operations:
+Common commands for debugging:
 
 ```bash
-# Re-run the onboard wizard (to change config)
-ssh vultr_openclaw "source ~/.bashrc && openclaw onboard"
-
 # Restart the gateway
 ssh vultr_openclaw "source ~/.bashrc && openclaw gateway restart"
 
@@ -233,9 +246,6 @@ ssh vultr_openclaw "source ~/.bashrc && openclaw plugins list"
 
 # View available models
 ssh vultr_openclaw "source ~/.bashrc && openclaw models list"
-
-# Open the terminal UI
-ssh vultr_openclaw -t "source ~/.bashrc && openclaw tui"
 
 # View live logs
 ssh vultr_openclaw "journalctl --user -u openclaw-gateway.service -f"
