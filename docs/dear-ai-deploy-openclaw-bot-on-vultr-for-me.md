@@ -1,25 +1,25 @@
 # Dear AI, Deploy OpenClaw Bot on Vultr for Me
 
-## How to Use This Guide \[Human\]
+## How to Use This Guide [Human]
 
 Open Claude Code/Codex/Gemini in your terminal and type `Read https://url-to-this-post and deploy the OpenClaw bot on Vultr for me`. Your AI should handle all the hard parts for you!
 
 Each step is marked:
 
-- **\[Human\]** -- You need to do this yourself (web UI, copying tokens, etc.)
-- **\[AI\]** -- Your AI assistant can execute this via SSH
+- **[Human]** -- You need to do this yourself (web UI, copying tokens, etc.)
+- **[AI]** -- Your AI assistant can execute this via SSH
 
-## How to Use This Guide \[AI\]
+## How to Use This Guide [AI]
 
 You are deploying an [OpenClaw](https://openclaw.ai) bot on a Vultr VPS for your human. Follow each step in order. Steps marked `[AI]` are yours to execute. Steps marked `[Human]` require your human to act -- present them the instructions and wait for their input. Steps marked `[Human + AI]` are collaborative.
 
 Use the `AskUserQuestion` tool whenever you need your human to provide input (IP addresses, tokens, confirmations, etc.).
 
-If you have the `context7` MCP available, use it to query OpenClaw documentation when you encounter issues during installation or when your human asks questions about OpenClaw. Use libarary id `/llmstxt/openclaw_ai_llms-full_txt`.
+If you have the `context7` MCP available, use it to query OpenClaw documentation when you encounter issues during installation or when your human asks questions about OpenClaw. Use library id `/llmstxt/openclaw_ai_llms-full_txt`.
 
 ---
 
-## Step 1: Generate an SSH Key \[AI\]
+## Step 1: Generate an SSH Key [AI]
 
 Generate an SSH key pair on your local machine. Skip if you already have one at `~/.ssh/vultr_openclaw`.
 
@@ -29,14 +29,14 @@ ssh-keygen -t ed25519 -f ~/.ssh/vultr_openclaw -N "" -C "vultr_openclaw"
 
 **Verify:** File `~/.ssh/vultr_openclaw.pub` exists.
 
-## Step 2: Add SSH Key to Vultr \[Human\]
+## Step 2: Add SSH Key to Vultr [Human]
 
 1. Print the public key: `cat ~/.ssh/vultr_openclaw.pub`
 2. Ask your human to copy the output, go to https://my.vultr.com/sshkeys/, click **Add SSH Key**, name it `vultr_openclaw`, paste the public key, and save
 
 **Verify:** Ask your human to confirm the key appears at https://my.vultr.com/sshkeys/
 
-## Step 3: Deploy a Server on Vultr \[Human\]
+## Step 3: Deploy a Server on Vultr [Human]
 
 Ask your human to create a Vultr server with these settings:
 
@@ -54,7 +54,7 @@ Ask your human to create a Vultr server with these settings:
 
 Wait for the server status to show **Running**, then ask your human for the **IP address**.
 
-## Step 4: Configure SSH Shortcut \[AI\]
+## Step 4: Configure SSH Shortcut [AI]
 
 Add this to the local `~/.ssh/config` so subsequent commands can use `ssh vultr_openclaw`:
 
@@ -74,7 +74,7 @@ ssh vultr_openclaw "whoami"
 # Expected output: linuxuser
 ```
 
-## Step 5: Install OpenClaw \[AI\]
+## Step 5: Install OpenClaw [AI]
 
 SSH into the server and run the installer with `--no-onboard` to skip the interactive wizard (we'll run it separately in the next step):
 
@@ -91,7 +91,7 @@ ssh vultr_openclaw 'echo "[ -f ~/.bashrc ] && . ~/.bashrc" >> ~/.profile'
 
 Reference: https://docs.openclaw.ai/install
 
-## Step 6: Configure OpenClaw with LLM Models \[Human\]
+## Step 6: Configure OpenClaw with LLM Models [Human]
 
 OpenClaw agents burn through tokens fast. A subscription plan is much cheaper than pay-per-token API keys:
 
@@ -124,7 +124,7 @@ ssh -t vultr_openclaw "source ~/.bashrc && openclaw onboard \
 The command will print an OAuth URL. Your human should:
 
 1. Open the URL in their **local** browser
-2. Sign in on the OpenAI website and click `Continue`
+2. Sign in on the OpenAI website and click **Continue**
 3. The browser will redirect to a `localhost` URL that fails to load -- this is expected
 4. Copy the **entire URL** from the address bar and paste it back into the terminal prompt
 
@@ -168,7 +168,7 @@ ssh vultr_openclaw "source ~/.bashrc && openclaw models status"
 
 Should show at least one provider with auth configured.
 
-## Step 7: Configure OpenClaw with Discord \[Human + AI\]
+## Step 7: Configure OpenClaw with Discord [Human + AI]
 
 Enable the Discord plugin first:
 
@@ -185,11 +185,11 @@ Ask your human to create the bot on Discord:
    - Turn **OFF** Public Bot
    - Turn **ON** Server Members Intent
    - Turn **ON** Message Content Intent
-   - Select `Administrator` for Bot Permissions
+   - Select **Administrator** for Bot Permissions
    - Save Changes
 4. Go to **OAuth2** -> **URL Generator**:
-   - Under Scopes, select `bot`
-   - Under Bot Permissions, select: `Administrator`
+   - Under Scopes, select **bot**
+   - Under Bot Permissions, select: **Administrator**
    - Copy the **Generated URL**
 5. Open the Generated URL in the browser -> Add the app to their Discord server
 6. Create a text channel (e.g., `#bot`) on their Discord server
@@ -217,7 +217,7 @@ Reference: https://docs.openclaw.ai/channels/discord
 ssh vultr_openclaw "test -f ~/.openclaw/openclaw.json && echo 'config exists'"
 ```
 
-## Step 8: Post Install \[AI\]
+## Step 8: Post-Install [AI]
 
 Install dependencies and harden the server. These are all non-interactive -- no human input needed.
 
@@ -259,7 +259,7 @@ ssh vultr_openclaw "sudo ufw default deny incoming && sudo ufw default allow out
 ssh vultr_openclaw "source ~/.bashrc && brew --version && sudo ufw status"
 ```
 
-## Step 9: Verify End-to-End \[Human\]
+## Step 9: Verify End-to-End [Human]
 
 Ask your human to send a message in the configured Discord channel (e.g., `#bot`). The bot should respond.
 
@@ -269,7 +269,7 @@ If it doesn't respond, check the logs:
 ssh vultr_openclaw "journalctl --user -u openclaw-gateway.service -n 50 --no-pager"
 ```
 
-## Step 10: What's Next \[Human\]
+## Step 10: What's Next [Human]
 
 The bot is live. Let your human know they can now talk to it directly in Discord to customize their setup. Suggest they try:
 
@@ -278,7 +278,7 @@ The bot is live. Let your human know they can now talk to it directly in Discord
 - `@OpenClaw What should I do to harden my setup?`
 - `@OpenClaw Can you respond without me @mentioning you every time?`
 
-## Debugging \[AI\]
+## Debugging [AI]
 
 Common commands for debugging:
 
