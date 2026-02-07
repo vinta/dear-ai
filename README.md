@@ -15,8 +15,8 @@ Open your AI coding agent in the terminal and type:
 
 ## Skills
 
-All you actually need is a one-line prompt, `Fetch and follow https://vinta.github.io/dear-ai/guide-name.md`, to get things done. But if for some reason you insist everything must be an agentic skill, then sure, knock yourself out:
+Yes, you _could_ just use a one-line prompt like `Fetch and follow https://vinta.github.io/dear-ai/guide-name.md` and get things done. But if you _really_ need everything wrapped in a shiny agentic skill so you can pretend it's more productive, fine, knock yourself out:
 
 ```bash
-npx skills add https://github.com/vinta/dear-ai
+npx skills add vinta/dear-ai
 ```
