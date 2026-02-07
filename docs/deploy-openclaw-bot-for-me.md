@@ -269,9 +269,9 @@ ssh vultr_openclaw "journalctl --user -u openclaw-gateway.service -n 50 --no-pag
 The bot is live. Let your human know they can now talk to it directly in Discord to customize their setup. Suggest they try:
 
 - `@OpenClaw I only want you to respond in the #bot channel, not everywhere.`
-- `@OpenClaw Don't reply to DMs from strangers.`
-- `@OpenClaw What should I do to harden my setup?`
 - `@OpenClaw Can you respond without me @mentioning you every time?`
+- `@OpenClaw How do I access the web UI from my local machine?`
+- `@OpenClaw What should I do to harden my setup?`
 
 ## Debugging [AI]
 
