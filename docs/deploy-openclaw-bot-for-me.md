@@ -1,13 +1,16 @@
 # Dear AI, Deploy OpenClaw Bot for Me
 
-## How to Use This Guide [Human]
-
-Open Claude Code/Codex/Gemini in your terminal and type `Read https://vinta.github.io/dear-ai/deploy-openclaw-bot-for-me.md and please do that for me`. Your AI should handle all the hard parts for you!
-
 Each step is marked:
 
-- **[Human]** -- You need to do this yourself (web UI, copying tokens, etc.)
-- **[AI]** -- Your AI assistant can execute this via SSH
+- **[Human]** -- Human acts (web UI, copying tokens)
+- **[AI]** -- AI executes (SSH commands, file edits)
+- **[Human + AI]** -- Both collaborate (AI runs commands, human provides input mid-step)
+
+## How to Use This Guide [Human]
+
+Open Claude Code/Codex/Gemini in your terminal and type `Read https://vinta.github.io/dear-ai/deploy-openclaw-bot-for-me.md and do that for me`. Your AI should handle all the hard parts for you!
+
+This guide covers a minimal setup. Once the bot is running, you can talk to it directly in Discord to customize it however you like.
 
 ## How to Use This Guide [AI]
 
