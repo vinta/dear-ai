@@ -1,5 +1,7 @@
 # Dear AI
 
+![Dear AI](assets/dear-ai.png)
+
 > Dear AI, please do X for me.
 
 Step-by-step guides that AI coding agents can execute for you.
