@@ -34,8 +34,8 @@ ssh-keygen -t ed25519 -f ~/.ssh/vultr_openclaw -N "" -C "vultr_openclaw"
 
 ## Step 2: Add SSH Key to Vultr [Human]
 
-1. Print the public key: `cat ~/.ssh/vultr_openclaw.pub`
-2. Ask your human to copy the output, go to [Vultr SSH Keys](https://my.vultr.com/sshkeys/), click **Add SSH Key**, name it `vultr_openclaw`, paste the public key, and save
+1. Read `~/.ssh/vultr_openclaw.pub` and display the public key so your human can copy it
+2. Ask your human to go to [Vultr SSH Keys](https://my.vultr.com/sshkeys/), click **Add SSH Key**, name it `vultr_openclaw`, paste the public key, and save
 
 **Verify:** Ask your human to confirm the key appears at [Vultr SSH Keys](https://my.vultr.com/sshkeys/)
 
