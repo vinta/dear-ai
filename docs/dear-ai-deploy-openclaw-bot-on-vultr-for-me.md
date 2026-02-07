@@ -36,7 +36,7 @@ ssh-keygen -t ed25519 -f ~/.ssh/vultr_openclaw -N "" -C "vultr_openclaw"
 
 **Verify:** Ask your human to confirm the key appears at https://my.vultr.com/sshkeys/
 
-## Step 3: Create a Server on Vultr \[Human\]
+## Step 3: Deploy a Server on Vultr \[Human\]
 
 Ask your human to create a Vultr server with these settings:
 
@@ -89,6 +89,15 @@ ssh vultr_openclaw 'echo "export PATH=\$HOME/.npm-global/bin:\$PATH" >> ~/.bashr
 ssh vultr_openclaw 'echo "[ -f ~/.bashrc ] && . ~/.bashrc" >> ~/.profile'
 ```
 
+## Step 6: Install Tools \[AI\]
+
+Install Homebrew on the server since OpenClaw uses `brew` for skills dependency management.
+
+```bash
+ssh vultr_openclaw 'NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
+ssh vultr_openclaw 'echo "eval \"\$(/home/linuxuser/.linuxbrew/bin/brew shellenv)\"" >> ~/.bashrc'
+```
+
 **Verify:**
 
 ```bash
@@ -97,7 +106,7 @@ ssh vultr_openclaw "source ~/.bashrc && openclaw --version"
 
 Reference: https://docs.openclaw.ai/install
 
-## Step 6: Onboard OpenClaw with Model Provider \[Human\]
+## Step 7: Configure OpenClaw with LLM Models \[Human\]
 
 OpenClaw agents burn through tokens fast. A subscription plan is much cheaper than pay-per-token API keys:
 
@@ -174,9 +183,9 @@ ssh vultr_openclaw "source ~/.bashrc && openclaw models status"
 
 Should show at least one provider with auth configured.
 
-### Create a Discord Bot and Connect It \[Human + AI\]
+## Step 8: Configure OpenClaw with Discord \[Human + AI\]
 
-Enable the Discord channel plugin first:
+Enable the Discord plugin first:
 
 ```bash
 ssh vultr_openclaw "source ~/.bashrc && openclaw plugins enable discord"
@@ -223,7 +232,7 @@ Reference: https://docs.openclaw.ai/channels/discord
 ssh vultr_openclaw "test -f ~/.openclaw/openclaw.json && echo 'config exists'"
 ```
 
-## Step 7: Verify End-to-End \[Human\]
+## Step 9: Verify End-to-End \[Human\]
 
 Ask your human to send a message in the configured Discord channel (e.g., `#bot`). The bot should respond.
 
@@ -233,7 +242,7 @@ If it doesn't respond, check the logs:
 ssh vultr_openclaw "journalctl --user -u openclaw-gateway.service -n 50 --no-pager"
 ```
 
-## Step 8: What's Next \[Human\]
+## Step 10: What's Next \[Human\]
 
 The bot is live. Let your human know they can now talk to it directly in Discord to customize their setup. Suggest they try:
 
