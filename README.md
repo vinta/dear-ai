@@ -1,7 +1,11 @@
 # Dear AI
 
-Dear AI, please do this for me.
+Dear AI, please do that for me.
 
 ## Things to Tell AI to Do
 
-- [Dear AI, Deploy OpenClaw Bot on Vultr for Me](docs/dear-ai-deploy-openclaw-bot-on-vultr-for-me.md)
+Open Claude Code/Codex/Gemini in your terminal and type:
+
+- `Read https://vinta.github.io/dear-ai/deploy-openclaw-bot-for-me.md and please do that for me`
+
+Let your AI handle all the hard parts for you!
