@@ -89,24 +89,9 @@ ssh vultr_openclaw 'echo "export PATH=\$HOME/.npm-global/bin:\$PATH" >> ~/.bashr
 ssh vultr_openclaw 'echo "[ -f ~/.bashrc ] && . ~/.bashrc" >> ~/.profile'
 ```
 
-## Step 6: Install Tools \[AI\]
-
-Install Homebrew on the server since OpenClaw uses `brew` for skills dependency management.
-
-```bash
-ssh vultr_openclaw 'NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
-ssh vultr_openclaw 'echo "eval \"\$(/home/linuxuser/.linuxbrew/bin/brew shellenv)\"" >> ~/.bashrc'
-```
-
-**Verify:**
-
-```bash
-ssh vultr_openclaw "source ~/.bashrc && openclaw --version"
-```
-
 Reference: https://docs.openclaw.ai/install
 
-## Step 7: Configure OpenClaw with LLM Models \[Human\]
+## Step 6: Configure OpenClaw with LLM Models \[Human\]
 
 OpenClaw agents burn through tokens fast. A subscription plan is much cheaper than pay-per-token API keys:
 
@@ -183,7 +168,7 @@ ssh vultr_openclaw "source ~/.bashrc && openclaw models status"
 
 Should show at least one provider with auth configured.
 
-## Step 8: Configure OpenClaw with Discord \[Human + AI\]
+## Step 7: Configure OpenClaw with Discord \[Human + AI\]
 
 Enable the Discord plugin first:
 
@@ -230,6 +215,32 @@ Reference: https://docs.openclaw.ai/channels/discord
 
 ```bash
 ssh vultr_openclaw "test -f ~/.openclaw/openclaw.json && echo 'config exists'"
+```
+
+## Step 8: Post Install \[AI\]
+
+Install the following tools on the server. No need to ask for permissions since they're essential for OpenClaw.
+
+### Homebrew
+
+Install Homebrew on the server since OpenClaw uses `brew` for skills dependency management.
+
+```bash
+ssh vultr_openclaw 'NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
+ssh vultr_openclaw 'echo "eval \"\$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)\"" >> ~/.bashrc'
+```
+
+**Verify:**
+
+```bash
+ssh vultr_openclaw "source ~/.bashrc && brew --version"
+```
+
+### Skills
+
+```bash
+ssh vultr_openclaw "source ~/.bashrc && npm install -g @steipete/bird"
+ssh vultr_openclaw "source ~/.bashrc && npm install -g @steipete/bird"
 ```
 
 ## Step 9: Verify End-to-End \[Human\]
