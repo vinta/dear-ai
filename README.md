@@ -12,3 +12,11 @@ Open your AI coding agent in the terminal and type:
 
 - `Fetch and follow https://vinta.github.io/dear-ai/deploy-openclaw-bot-for-me.md`
   - Source: [Deploy OpenClaw Bot for Me](docs/deploy-openclaw-bot-for-me.md) - Deploy an [OpenClaw](https://openclaw.ai) bot for Discord on a Vultr server
+
+## Skills
+
+All you actually need is a one-line prompt, `Fetch and follow https://vinta.github.io/dear-ai/guide-name.md`, to get things done. But if for some reason you insist everything must be an agentic skill, then sure, knock yourself out:
+
+```bash
+npx skills add https://github.com/vinta/dear-ai
+```
