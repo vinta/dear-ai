@@ -16,7 +16,7 @@ This guide covers a minimal setup. Once the bot is running, you can talk to it d
 
 You are deploying an [OpenClaw](https://openclaw.ai) bot on a Vultr VPS for your human. Follow each step in order. Steps marked `[AI]` are yours to execute. Steps marked `[Human]` require your human to act -- present them the instructions and wait for their input. Steps marked `[Human + AI]` are collaborative.
 
-Use the `AskUserQuestion` tool whenever you need your human to provide input (IP addresses, tokens, confirmations, etc.).
+Use the `AskUserQuestion` tool whenever you need your human to provide input (IP addresses, tokens, confirmations, etc.). If your human runs into issues during a `[Human]` step, ask them to paste a screenshot -- you can read images and diagnose most UI problems directly.
 
 If you have the `context7` MCP available, use it to query OpenClaw documentation when you encounter issues during installation or when your human asks questions about OpenClaw. Use library id `/llmstxt/openclaw_ai_llms-full_txt`.
 
