@@ -1,6 +1,6 @@
 # Dear AI
 
-![Dear AI](assets/dear-ai.png)
+![Dear AI](https://raw.githubusercontent.com/vinta/dear-ai/main/assets/dear-ai.png)
 
 > Dear AI, please do X for me.
 
