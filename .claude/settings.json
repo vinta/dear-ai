@@ -1,14 +1,17 @@
 {
   "permissions": {
     "allow": [
-      "Bash(ssh:*)",
+      "Read(~/.ssh/vultr_openclaw*)",
+      "Read(~/.ssh/config)",
+      "Edit(~/.ssh/config)",
       "Bash(ssh-keygen:*)",
-      "Bash(cat:*)",
+      "Bash(ssh:*)",
       "Bash(test:*)",
       "mcp__plugin_context7_context7__query-docs",
       "mcp__plugin_context7_context7__resolve-library-id",
       "WebFetch(domain:docs.openclaw.ai)",
-      "WebFetch(domain:openclaw.ai)"
+      "WebFetch(domain:openclaw.ai)",
+      "WebFetch(domain:vinta.github.io)"
     ]
   }
 }
