@@ -8,7 +8,6 @@ export const SCENE_2_DURATION = 75; // 2.5s - User typing
 export const SCENE_3_DURATION = 90; // 3s - Fetch content
 export const SCENE_4_DURATION = 150; // 5s - Guide scroll
 export const SCENE_4B_DURATION = 480; // 16s - Agent execution (SSH + AskUser)
-export const SCENE_5_DURATION = 90; // 3s - Closing
 
 export const TRANSITION_DURATION = 10;
 
@@ -17,9 +16,8 @@ export const TOTAL_DURATION =
   SCENE_2_DURATION +
   SCENE_3_DURATION +
   SCENE_4_DURATION +
-  SCENE_4B_DURATION +
-  SCENE_5_DURATION -
-  TRANSITION_DURATION * 5; // 5 transitions between 6 scenes
+  SCENE_4B_DURATION -
+  TRANSITION_DURATION * 4; // 4 transitions between 5 scenes
 
 // Colors
 export const COLORS = {

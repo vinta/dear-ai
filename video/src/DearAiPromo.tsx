@@ -7,14 +7,12 @@ import { UserTyping } from "./scenes/UserTyping";
 import { FetchContent } from "./scenes/FetchContent";
 import { GuideScroll } from "./scenes/GuideScroll";
 import { AgentExecution } from "./scenes/AgentExecution";
-import { Closing } from "./scenes/Closing";
 import {
   SCENE_1_DURATION,
   SCENE_2_DURATION,
   SCENE_3_DURATION,
   SCENE_4_DURATION,
   SCENE_4B_DURATION,
-  SCENE_5_DURATION,
   TRANSITION_DURATION,
 } from "./constants";
 
@@ -68,14 +66,6 @@ export const DearAiPromo: React.FC = () => {
         <AgentExecution />
       </TransitionSeries.Sequence>
 
-      <TransitionSeries.Transition
-        presentation={fade()}
-        timing={transitionTiming}
-      />
-
-      <TransitionSeries.Sequence durationInFrames={SCENE_5_DURATION}>
-        <Closing />
-      </TransitionSeries.Sequence>
     </TransitionSeries>
   );
 };
