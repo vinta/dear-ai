@@ -1,0 +1,22 @@
+{
+  "name": "dear-ai-video",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "studio": "remotion studio",
+    "render": "remotion render DearAiPromo out.mp4",
+    "build": "remotion render DearAiPromo out.mp4"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.261",
+    "@remotion/google-fonts": "4.0.261",
+    "@remotion/transitions": "4.0.261",
+    "react": "^19",
+    "react-dom": "^19",
+    "remotion": "4.0.261"
+  },
+  "devDependencies": {
+    "@types/react": "^19",
+    "typescript": "^5"
+  }
+}
