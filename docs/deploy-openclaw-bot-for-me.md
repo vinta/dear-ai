@@ -188,19 +188,19 @@ Ask your human to create the bot on Discord:
    - Turn **OFF** Public Bot
    - Turn **ON** Server Members Intent
    - Turn **ON** Message Content Intent
-   - Select **Administrator** for Bot Permissions
    - Save Changes
 4. Go to **OAuth2** -> **URL Generator**:
-   - Under Scopes, select **bot**
-   - Under Bot Permissions, select: **Administrator**
+   - Under Scopes, select **bot** and **applications.commands**
+   - Under Bot Permissions, select: **View Channels**, **Send Messages**, **Read Message History**, **Embed Links**, **Attach Files**, **Add Reactions**
    - Copy the **Generated URL**
 5. Open the Generated URL in the browser -> Add the app to their Discord server
-6. Create a text channel (e.g., `#bot`) on their Discord server
+6. Create a text channel (e.g., `#openclaw`) on their Discord server
 
 Ask your human for the `DISCORD_BOT_TOKEN` and run:
 
 ```bash
-ssh vultr_openclaw "source ~/.bashrc && openclaw channels add --channel discord --token YOUR_DISCORD_BOT_TOKEN"
+ssh vultr_openclaw "source ~/.bashrc && openclaw config set channels.discord.token '\"YOUR_DISCORD_BOT_TOKEN\"' --json"
+ssh vultr_openclaw "source ~/.bashrc && openclaw config set channels.discord.enabled true --json"
 ```
 
 Replace `YOUR_DISCORD_BOT_TOKEN` with the token your human provides.
@@ -256,7 +256,7 @@ ssh vultr_openclaw "source ~/.bashrc && brew --version && sudo ufw status"
 
 ## Step 9: Verify End-to-End [Human]
 
-Ask your human to send a message in the configured Discord channel (e.g., `#bot`). The bot should respond.
+Ask your human to send a message in the configured Discord channel (e.g., `#openclaw`). The bot should respond.
 
 If it doesn't respond, check the logs:
 
@@ -278,6 +278,12 @@ The bot is live. Let your human know they can now talk to it directly in Discord
 Common commands for debugging:
 
 ```bash
+# Run the built-in diagnostic check
+ssh vultr_openclaw "source ~/.bashrc && openclaw doctor"
+
+# Probe channel connectivity
+ssh vultr_openclaw "source ~/.bashrc && openclaw channels status --probe"
+
 # Restart the gateway
 ssh vultr_openclaw "source ~/.bashrc && openclaw gateway restart"
 
@@ -287,9 +293,21 @@ ssh vultr_openclaw "source ~/.bashrc && openclaw plugins list"
 # Check auth / provider status
 ssh vultr_openclaw "source ~/.bashrc && openclaw models status"
 
+# Follow logs in real time
+ssh vultr_openclaw "source ~/.bashrc && openclaw logs --follow"
+
 # View recent logs (last 50 lines)
 ssh vultr_openclaw "journalctl --user -u openclaw-gateway.service -n 50 --no-pager"
 
 # View full log file (more detail than journalctl)
 ssh vultr_openclaw "cat /tmp/openclaw/openclaw-\$(date -u +%Y-%m-%d).log | tail -100"
 ```
+
+## References
+
+If a command fails, a config key is rejected, or you're unsure about a flag or value, fetch the relevant page below before guessing:
+
+- [CLI command reference](https://docs.openclaw.ai/cli) -- flags and subcommands for `onboard`, `config set`, `gateway`, `pairing`, `plugins`, `models`, `doctor`, `logs`
+- [Gateway configuration reference](https://docs.openclaw.ai/gateway/configuration-reference) -- all config paths and accepted values for `openclaw config set`
+- [Providers](https://docs.openclaw.ai/providers) -- supported LLM providers and auth methods
+- [Discord channel](https://docs.openclaw.ai/channels/discord) -- Discord-specific setup, permissions, policies, and troubleshooting
