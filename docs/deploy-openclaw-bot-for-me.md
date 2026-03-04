@@ -141,8 +141,9 @@ Ask your human to open a new terminal and run:
 
 1. `claude setup-token` -- this opens the Anthropic authorize page in their browser
 2. Click **Authorize** on the Anthropic website
-3. Go back to the terminal and copy the token that was printed
-4. Run the onboard command:
+3. Copy **Authentication Code** and paste it to their terminal followed by "Paste code here if prompted >"
+4. Copy the **OAuth token** that is printed on the terminal which looks like `sk-ant-xxx-xxx`
+5. Run the onboard command:
 
 ```bash
 ssh -t vultr_openclaw "source ~/.bashrc && openclaw onboard \
@@ -159,7 +160,7 @@ ssh -t vultr_openclaw "source ~/.bashrc && openclaw onboard \
    --skip-ui"
 ```
 
-5. Paste the token when prompted
+6. Paste the **OAuth token** when prompted with "Paste Anthropic setup-token"
 
 Reference: [OpenClaw Anthropic Provider](https://docs.openclaw.ai/providers/anthropic)
 
