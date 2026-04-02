@@ -18,7 +18,7 @@ You are deploying an [OpenClaw](https://openclaw.ai) bot on a Vultr VPS for your
 
 Use the `AskUserQuestion` tool whenever you need your human to provide input (IP addresses, tokens, confirmations, etc.). If your human runs into issues during a `[Human]` step, ask them to paste a screenshot -- you can read images and diagnose most UI problems directly.
 
-If you have the `context7` MCP available, use it to query OpenClaw documentation when you encounter issues during installation or when your human asks questions about OpenClaw. Use library id `/llmstxt/openclaw_ai_llms-full_txt`.
+If you have the `find-docs` skill or `context7` MCP available, use it to query OpenClaw documentation when you encounter issues during installation or when your human asks questions about OpenClaw. Use library id `/openclaw/openclaw`.
 
 ---
 
@@ -222,7 +222,7 @@ Reference: [OpenClaw Discord Channel](https://docs.openclaw.ai/channels/discord)
 
 ```bash
 ssh vultr_openclaw "source ~/.bashrc && openclaw channels status --probe"
-ssh vultr_openclaw "source ~/.bashrc && openclaw status --deep"
+ssh vultr_openclaw "source ~/.bashrc && openclaw gateway status --deep"
 ```
 
 The Discord channel should show as configured and reachable. If either command reports auth, permission, or routing problems, fix those before moving on.
