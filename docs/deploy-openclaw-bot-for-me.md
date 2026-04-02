@@ -206,12 +206,21 @@ ssh vultr_openclaw "source ~/.bashrc && openclaw config set channels.discord.ena
 
 Replace `YOUR_DISCORD_BOT_TOKEN` with the token your human provides.
 
-The default `groupPolicy` is `allowlist` with no entries, so the bot silently ignores all server messages. Set it to `open` so the bot responds in any channel:
+The default `groupPolicy` is `allowlist` with no entries, so the bot silently ignores all server messages. We need to allow the owner's server.
+
+Ask your human to enable **Developer Mode** and copy the server ID:
+
+1. Open Discord **Settings** -> **Advanced** -> Turn **ON** Developer Mode
+2. Right-click the server name -> **Copy Server ID**
+
+Ask your human for the **server ID**, then run these commands, replacing `YOUR_GUILD_ID` with the ID your human provides:
 
 ```bash
-ssh vultr_openclaw "source ~/.bashrc && openclaw config set channels.discord.groupPolicy open"
+ssh vultr_openclaw "source ~/.bashrc && openclaw config set 'channels.discord.guilds.YOUR_GUILD_ID.requireMention' false --json"
 ssh vultr_openclaw "source ~/.bashrc && openclaw gateway restart"
 ```
+
+This keeps `groupPolicy` as the default `allowlist`, so the bot only responds in the specified server. Anyone in that server can interact with it.
 
 Reference: [OpenClaw Discord Channel](https://docs.openclaw.ai/channels/discord)
 
