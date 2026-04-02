@@ -88,7 +88,7 @@ ssh vultr_openclaw "curl -fsSL https://openclaw.ai/install.sh | bash -s -- --no-
 The `linuxuser` account on a fresh Vultr VPS has no `.bashrc` or `.profile`, so `openclaw` won't be on `$PATH` -- neither for SSH commands nor for interactive login. Set up both:
 
 ```bash
-ssh vultr_openclaw 'echo "export PATH=\$HOME/.npm-global/bin:\$PATH" >> ~/.bashrc'
+ssh vultr_openclaw 'echo "export PATH=\"\$(npm prefix -g)/bin:\$PATH\"" >> ~/.bashrc'
 ssh vultr_openclaw 'echo "[ -f ~/.bashrc ] && . ~/.bashrc" >> ~/.profile'
 ```
 
@@ -191,14 +191,15 @@ Ask your human to create the bot on Discord:
 5. Open the Generated URL in the browser -> Add the app to their Discord server
 6. Create a text channel (e.g., `#openclaw`) on their Discord server
 
-Ask your human for the `DISCORD_BOT_TOKEN` and run:
+Ask your human for the `DISCORD_BOT_TOKEN`, persist it on the gateway host, and configure OpenClaw to read it by env reference:
 
 ```bash
-ssh vultr_openclaw "source ~/.bashrc && openclaw config set channels.discord.token '\"YOUR_DISCORD_BOT_TOKEN\"' --strict-json"
+ssh vultr_openclaw "touch ~/.openclaw/.env && sed -i.bak '/^DISCORD_BOT_TOKEN=/d' ~/.openclaw/.env && printf '%s\n' 'DISCORD_BOT_TOKEN=YOUR_DISCORD_BOT_TOKEN' >> ~/.openclaw/.env && rm -f ~/.openclaw/.env.bak"
+ssh vultr_openclaw "source ~/.bashrc && openclaw config set channels.discord.token --ref-provider default --ref-source env --ref-id DISCORD_BOT_TOKEN"
 ssh vultr_openclaw "source ~/.bashrc && openclaw config set channels.discord.enabled true --strict-json"
 ```
 
-Replace `YOUR_DISCORD_BOT_TOKEN` with the token your human provides.
+Replace `YOUR_DISCORD_BOT_TOKEN` with the token your human provides. This keeps the token out of `~/.openclaw/openclaw.json`.
 
 The default `groupPolicy` is `allowlist` with no entries, so the bot silently ignores all server messages. We need to allow the owner's server.
 
