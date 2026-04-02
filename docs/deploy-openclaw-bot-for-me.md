@@ -94,14 +94,14 @@ ssh vultr_openclaw 'echo "[ -f ~/.bashrc ] && . ~/.bashrc" >> ~/.profile'
 
 Reference: [OpenClaw Install](https://docs.openclaw.ai/install)
 
-## Step 6: Configure OpenClaw with LLM Models [Human]
+## Step 6: Configure OpenClaw with LLM Models [Human + AI]
 
-OpenClaw agents burn through tokens fast. A subscription plan is much cheaper than pay-per-token API keys:
+OpenClaw agents burn through tokens fast. Subscription-backed auth can be much cheaper than pay-per-token API keys:
 
 - **OpenAI ChatGPT Pro/Plus** -- authenticates via Codex OAuth
 - **Anthropic Claude Pro/Max** -- authenticates via `claude setup-token`
 
-Ask your human which provider they prefer, then walk them through the corresponding flow below. Both require an interactive terminal, so your human will need to run the commands themselves.
+Ask your human which provider they prefer, then walk them through the corresponding flow below.
 
 Reference: [OpenClaw Onboard](https://docs.openclaw.ai/cli/onboard)
 
@@ -174,12 +174,6 @@ Should show at least one provider with auth configured.
 
 ## Step 7: Configure OpenClaw with Discord [Human + AI]
 
-Enable the Discord plugin first:
-
-```bash
-ssh vultr_openclaw "source ~/.bashrc && openclaw plugins enable discord"
-```
-
 Ask your human to create the bot on Discord:
 
 1. Go to [Discord Developer Applications](https://discord.com/developers/applications) -> **New Application** -> Name it `OpenClaw`
@@ -200,8 +194,8 @@ Ask your human to create the bot on Discord:
 Ask your human for the `DISCORD_BOT_TOKEN` and run:
 
 ```bash
-ssh vultr_openclaw "source ~/.bashrc && openclaw config set channels.discord.token '\"YOUR_DISCORD_BOT_TOKEN\"' --json"
-ssh vultr_openclaw "source ~/.bashrc && openclaw config set channels.discord.enabled true --json"
+ssh vultr_openclaw "source ~/.bashrc && openclaw config set channels.discord.token '\"YOUR_DISCORD_BOT_TOKEN\"' --strict-json"
+ssh vultr_openclaw "source ~/.bashrc && openclaw config set channels.discord.enabled true --strict-json"
 ```
 
 Replace `YOUR_DISCORD_BOT_TOKEN` with the token your human provides.
@@ -213,10 +207,10 @@ Ask your human to enable **Developer Mode** and copy the server ID:
 1. Open Discord **Settings** -> **Advanced** -> Turn **ON** Developer Mode
 2. Right-click the server name -> **Copy Server ID**
 
-Ask your human for the **server ID**, then run these commands, replacing `YOUR_GUILD_ID` with the ID your human provides:
+Ask your human for the **Server ID**, then run these commands, replacing `YOUR_DISCORD_SERVER_ID` with the ID your human provides:
 
 ```bash
-ssh vultr_openclaw "source ~/.bashrc && openclaw config set 'channels.discord.guilds.YOUR_GUILD_ID.requireMention' false --json"
+ssh vultr_openclaw "source ~/.bashrc && openclaw config set 'channels.discord.guilds.YOUR_DISCORD_SERVER_ID.requireMention' false --strict-json"
 ssh vultr_openclaw "source ~/.bashrc && openclaw gateway restart"
 ```
 
