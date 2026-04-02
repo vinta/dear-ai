@@ -221,8 +221,11 @@ Reference: [OpenClaw Discord Channel](https://docs.openclaw.ai/channels/discord)
 **Verify:**
 
 ```bash
-ssh vultr_openclaw "test -f ~/.openclaw/openclaw.json && echo 'config exists'"
+ssh vultr_openclaw "source ~/.bashrc && openclaw channels status --probe"
+ssh vultr_openclaw "source ~/.bashrc && openclaw status --deep"
 ```
+
+The Discord channel should show as configured and reachable. If either command reports auth, permission, or routing problems, fix those before moving on.
 
 ## Step 8: Post-Install [AI]
 
