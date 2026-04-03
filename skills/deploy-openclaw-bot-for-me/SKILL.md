@@ -1,6 +1,6 @@
 ---
 name: deploy-openclaw-bot-for-me
-description: (dear-ai) Deploy a OpenClaw bot with Discord integration on a Vultr server.
+description: Deploy a OpenClaw bot with Discord integration on a Vultr server.
 user-invocable: true
 allowed-tools:
   - Read
