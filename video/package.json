@@ -8,7 +8,7 @@
     "build": "remotion render DearAiPromo out.mp4"
   },
   "dependencies": {
-    "@remotion/cli": "4.0.261",
+    "@remotion/cli": "4.0.468",
     "@remotion/google-fonts": "4.0.261",
     "@remotion/transitions": "4.0.261",
     "react": "^19",
