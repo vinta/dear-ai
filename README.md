@@ -27,7 +27,3 @@ npx skills add vinta/dear-ai
 
 /deploy-openclaw-bot-for-me
 ```
-
-## Demo
-
-<video src="https://github.com/user-attachments/assets/24b6fb0e-a7c3-4ebb-8274-1c682b26127a" width="800" height="450"></video>

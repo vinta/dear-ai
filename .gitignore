@@ -1,5 +1,3 @@
-node_modules/
-*.mp4
 
 .claude/skills/
 .claude/settings.local.json
